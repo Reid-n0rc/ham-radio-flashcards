@@ -1,0 +1,49 @@
+{
+ "pools": [
+  {
+   "name": "extra-2024-2028",
+   "class": "Amateur Extra",
+   "start": "2024-07-01",
+   "end": "2028-06-30",
+   "status": "current",
+   "questions": 599,
+   "pdf": "Amateur_Extra_2024-2028_Flash_Cards.pdf",
+   "figure_cards": 10,
+   "sheets": 77,
+   "cards": 609,
+   "excluded": [],
+   "bytes": 535123
+  },
+  {
+   "name": "general-2023-2027",
+   "class": "General",
+   "start": "2023-07-01",
+   "end": "2027-06-30",
+   "status": "current",
+   "questions": 423,
+   "pdf": "General_2023-2027_Flash_Cards.pdf",
+   "figure_cards": 1,
+   "sheets": 53,
+   "cards": 424,
+   "excluded": [],
+   "bytes": 293221
+  },
+  {
+   "name": "technician-2026-2030",
+   "class": "Technician",
+   "start": "2026-07-01",
+   "end": "2030-06-30",
+   "status": "current",
+   "questions": 409,
+   "pdf": "Technician_2026-2030_Flash_Cards.pdf",
+   "figure_cards": 3,
+   "sheets": 52,
+   "cards": 412,
+   "excluded": [],
+   "bytes": 306859
+  }
+ ],
+ "updated": "2026-11-12T10:44:09-06:00",
+ "built": "2026-11-12T16:49:16Z",
+ "repo": "https://github.com/Reid-n0rc/ham-radio-flashcards"
+}
