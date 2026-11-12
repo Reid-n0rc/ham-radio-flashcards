@@ -1,0 +1,55 @@
+{
+ "extra-2024-2028": {
+  "url": "https://ncvec.org/index.php/2024-2028-extra-class-question-pool-release",
+  "documents": [
+   "2024-2028 Extra Class Question Pool and Syllabus Public Release with 3rd Errata Sept 25 2025.docx",
+   "2024-2028 Extra Class Question Pool and Syllabus Public Release with 3rd Errata Sept 25 2025.pdf",
+   "2024-2028 Extra Class Question Pool and Syllabus Public Release with 4th Errata Feb 4 2026.docx",
+   "2024-2028 Extra Class Question Pool and Syllabus Public Release with 4th Errata Feb 4 2026.pdf",
+   "Extra_Figures_2024-2028-1.pdf",
+   "NCVEC_Form_605_2022.pdf"
+  ],
+  "withdrawn": [
+   "E2A13",
+   "E4D05",
+   "E9E10"
+  ],
+  "fingerprint": "cddf3b49b6250a56f169f00bb9019b73daf70676c22ac46d2877a933e153bd09"
+ },
+ "general-2023-2027": {
+  "url": "https://ncvec.org/index.php/2023-2027-general-question-pool-release",
+  "documents": [
+   "G7-1.pdf",
+   "General Class Pool and Syllabus 2023-2027 Public Release with 5th Errata Nov 8 2024.docx",
+   "General Class Pool and Syllabus 2023-2027 Public Release with 5th Errata Nov 8 2024.pdf",
+   "General Class Pool and Syllabus 2023-2027 Public Release with 6th Errata Feb 4 2026.docx",
+   "General Class Pool and Syllabus 2023-2027 Public Release with 6th Errata Feb 4 2026.pdf",
+   "NCVEC_Form_605_2022.pdf"
+  ],
+  "withdrawn": [
+   "G1A04",
+   "G1C08",
+   "G1C09",
+   "G1C10",
+   "G1E09",
+   "G6B09",
+   "G8C01",
+   "G9C06",
+   "G9D13"
+  ],
+  "fingerprint": "7a24c5ea758443ccf1e2a954dc112d964144a3e4825eb8c2f66e784305f0fb3b"
+ },
+ "technician-2026-2030": {
+  "url": "https://ncvec.org/index.php/2026-2030-technician-question-pool",
+  "documents": [
+   "2026-2030 Technician Pool 3 Diagrams.pdf",
+   "2026-2030 Technician Pool and Syllabus Public Release Dec 18 2025.docx",
+   "2026-2030 Technician Pool and Syllabus Public Release Dec 18 2025.pdf",
+   "2026-2030 Technician Pool and Syllabus Public Release Feb 19 2026.docx",
+   "2026-2030 Technician Pool and Syllabus Public Release Feb 19 2026.pdf",
+   "NCVEC_Form_605_2022.pdf"
+  ],
+  "withdrawn": [],
+  "fingerprint": "12cc89c7e53b3b0027e8251f06312c29db8a5a7b9e7ce46383a87d5560c7db99"
+ }
+}
