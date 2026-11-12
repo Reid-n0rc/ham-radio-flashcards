@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ham Exam Flash Cards</title>
+<meta name="description" content="Printable duplex flash cards for the current Technician, General and Amateur Extra question pools.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='6' width='26' height='20' rx='2' fill='%23fff' stroke='%231C2B4F' stroke-width='2'/%3E%3Cpath d='M8 12h16M8 17h10' stroke='%231C2B4F' stroke-width='2'/%3E%3Ccircle cx='24' cy='20' r='3' fill='%23B3261E'/%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#EFF4E9; --rule:#D3E1CB; --rule-strong:#B4CAA8; --margin:#E2A49D;
+  --ink:#1C2B4F; --ink-soft:#4B5878; --ink-faint:#7A869F;
+  --card:#FFFFFF; --card-edge:#C9D3C2; --stamp:#B3261E; --ok:#2E6B3A;
+  --shadow:0 1px 0 #fff inset, 0 18px 40px -22px rgba(28,43,79,.45), 0 2px 6px -2px rgba(28,43,79,.18);
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Public Sans",ui-sans-serif,system-ui,sans-serif;
+  --gutter:clamp(16px,4vw,48px);
+  --line:28px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#121A2D; --rule:#1D2840; --rule-strong:#2B3956; --margin:#6B3540;
+    --ink:#E7ECF7; --ink-soft:#B3BDD3; --ink-faint:#8490AA;
+    --card:#1B2541; --card-edge:#2E3B5C; --stamp:#FF8A7F; --ok:#7FD39A;
+    --shadow:0 18px 40px -20px rgba(0,0,0,.7), 0 2px 6px -2px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121A2D; --rule:#1D2840; --rule-strong:#2B3956; --margin:#6B3540;
+  --ink:#E7ECF7; --ink-soft:#B3BDD3; --ink-faint:#8490AA;
+  --card:#1B2541; --card-edge:#2E3B5C; --stamp:#FF8A7F; --ok:#7FD39A;
+  --shadow:0 18px 40px -20px rgba(0,0,0,.7), 0 2px 6px -2px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; color:var(--ink); font:400 17px/1.6 var(--body);
+  background-color:var(--paper);
+  background-image:
+    linear-gradient(90deg, transparent calc(var(--gutter) * .55), var(--margin) calc(var(--gutter) * .55), var(--margin) calc(var(--gutter) * .55 + 1.5px), transparent calc(var(--gutter) * .55 + 1.5px)),
+    repeating-linear-gradient(180deg, transparent 0 calc(var(--line) - 1px), var(--rule) calc(var(--line) - 1px) var(--line));
+  font-feature-settings:"tnum" 1;
+}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--stamp); outline-offset:3px; border-radius:4px}
+.wrap{max-width:1140px; margin:0 auto; padding:0 var(--gutter) 0 calc(var(--gutter) * 1.3)}
+
+/* ---------- header ---------- */
+.top{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 0 0}
+.brand{display:flex; align-items:center; gap:10px; font:700 17px/1 var(--display); letter-spacing:-.01em; text-decoration:none}
+.brand svg{flex:none}
+.top nav{display:flex; gap:22px; font-size:15px; font-weight:500}
+.top nav a{text-decoration:none; color:var(--ink-soft)}
+.top nav a:hover{color:var(--ink); text-decoration:underline; text-underline-offset:4px}
+
+/* ---------- hero ---------- */
+.hero{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.02fr); gap:clamp(28px,5vw,72px); align-items:center; padding:clamp(40px,7vw,96px) 0 clamp(56px,8vw,112px)}
+h1{
+  font-family:var(--display); font-weight:800; font-stretch:78%;
+  font-size:clamp(46px,7.4vw,96px); line-height:.92; letter-spacing:-.035em; margin:0 0 26px;
+  font-variation-settings:"opsz" 96;
+}
+.lede{font-size:clamp(17px,1.6vw,20px); color:var(--ink-soft); max-width:34em; margin:0 0 30px}
+.actions{display:flex; flex-wrap:wrap; gap:12px}
+.btn{
+  display:inline-flex; align-items:center; gap:9px; padding:13px 20px; border-radius:6px;
+  font:600 16px/1 var(--body); text-decoration:none; cursor:pointer; border:1.5px solid var(--ink);
+  background:var(--ink); color:var(--paper);
+}
+.btn:hover{background:transparent; color:var(--ink)}
+.btn.ghost{background:transparent; color:var(--ink)}
+.btn.ghost:hover{background:var(--ink); color:var(--paper)}
+.btn svg{flex:none}
+
+/* ---------- live card ---------- */
+.deck{position:relative}
+.deck-head{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; flex-wrap:wrap}
+.seg{display:inline-flex; border:1.5px solid var(--ink); border-radius:999px; padding:3px; background:var(--card)}
+.seg button{
+  font:600 14px/1 var(--body); color:var(--ink-soft); background:none; border:0; border-radius:999px;
+  padding:9px 14px; cursor:pointer;
+}
+.seg button[aria-pressed="true"]{background:var(--ink); color:var(--paper)}
+.count{font-size:14px; color:var(--ink-faint)}
+
+.stack{position:relative; perspective:1600px}
+.stack::before,.stack::after{
+  content:""; position:absolute; inset:0; background:var(--card); border:1px solid var(--card-edge); border-radius:5px;
+  box-shadow:var(--shadow);
+}
+.stack::before{transform:rotate(-3.2deg) translate(-10px,10px)}
+.stack::after{transform:rotate(2.1deg) translate(8px,6px)}
+.flip{
+  position:relative; z-index:1; aspect-ratio:8/5; width:100%;
+  transform-style:preserve-3d; transition:transform .55s cubic-bezier(.3,.7,.2,1);
+}
+.flip.flipped{transform:rotateY(180deg)}
+.face{
+  position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  background:var(--card); border:1px solid var(--card-edge); border-radius:5px; box-shadow:var(--shadow);
+  padding:clamp(16px,2.6vw,26px); display:flex; flex-direction:column; overflow:hidden;
+}
+.face::after{ /* the dashed cut line, like the printed sheet */
+  content:""; position:absolute; inset:7px; border:1px dashed var(--card-edge); border-radius:2px; pointer-events:none;
+}
+.back{transform:rotateY(180deg); align-items:center; justify-content:center; text-align:center}
+.qid{font-size:12.5px; font-weight:700; color:var(--ink-faint); margin-bottom:6px; letter-spacing:.02em}
+.qtext{font:700 clamp(15px,1.55vw,18px)/1.3 var(--body); margin:0 0 10px}
+.qfig{display:block; max-height:34%; max-width:60%; margin:0 0 8px; object-fit:contain; background:#fff; border-radius:3px}
+.choices{list-style:none; margin:0; padding:0; display:grid; gap:2px; overflow:auto}
+.choices button{
+  display:grid; grid-template-columns:1.6em 1fr; text-align:left; width:100%;
+  font:400 clamp(13.5px,1.35vw,15.5px)/1.32 var(--body); color:var(--ink);
+  background:none; border:0; border-radius:4px; padding:5px 6px; cursor:pointer;
+}
+.choices button:hover{background:var(--paper)}
+.choices b{font-weight:700}
+.big{font:800 clamp(64px,11vw,128px)/1 var(--display); font-stretch:80%; letter-spacing:-.04em}
+.verdict{font:600 16px/1.3 var(--body); margin:10px 0 6px}
+.verdict.ok{color:var(--ok)} .verdict.no{color:var(--stamp)}
+.answer{color:var(--ink-soft); max-width:30em; font-size:15px; margin:0}
+.back .qid{position:absolute; bottom:18px; left:0; right:0; margin:0}
+.deck-foot{display:flex; gap:10px; margin-top:22px; align-items:center; flex-wrap:wrap}
+.deck-foot .hint{font-size:13.5px; color:var(--ink-faint); margin-left:auto}
+kbd{font:600 12px/1 var(--body); border:1px solid var(--rule-strong); border-bottom-width:2px; border-radius:4px; padding:2px 5px; background:var(--card)}
+
+/* ---------- sections ---------- */
+section{padding:clamp(40px,6vw,80px) 0}
+h2{font:800 clamp(32px,4.2vw,52px)/1 var(--display); font-stretch:82%; letter-spacing:-.03em; margin:0 0 12px}
+.sub{color:var(--ink-soft); max-width:40em; margin:0 0 34px}
+
+/* downloads as logbook entries */
+.log{border-top:2px solid var(--ink)}
+.entry{
+  display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1.2fr) auto auto; gap:24px; align-items:center;
+  padding:26px 0; border-bottom:1px solid var(--rule-strong);
+}
+.entry h3{font:800 clamp(28px,3.4vw,40px)/1 var(--display); font-stretch:85%; letter-spacing:-.025em; margin:0 0 6px}
+.entry .pool{color:var(--ink-soft); font-size:15px}
+.facts{display:flex; gap:22px; font-size:15px; color:var(--ink-soft)}
+.facts strong{display:block; font:700 22px/1.1 var(--body); color:var(--ink)}
+.stamp{
+  justify-self:center; transform:rotate(-7deg); color:var(--stamp); border:2.5px solid currentColor; border-radius:6px;
+  padding:6px 11px 5px; font:800 14px/1.15 var(--display); text-align:center; opacity:.88;
+  box-shadow:0 0 0 1.5px var(--paper) inset, 0 0 0 3px currentColor inset;
+  mix-blend-mode:multiply;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .stamp{mix-blend-mode:normal}}
+.stamp.soon{color:var(--ink-soft)}
+.note{grid-column:1/-1; font-size:14px; color:var(--ink-faint); margin:-12px 0 0}
+
+/* printing steps (a real sequence) */
+.steps{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(18px,3vw,36px); counter-reset:s; margin:0; padding:0; list-style:none}
+.steps li{counter-increment:s; border-top:2px solid var(--ink); padding-top:14px}
+.steps li::before{content:counter(s); display:block; font:800 44px/1 var(--display); font-stretch:80%; margin-bottom:8px; color:var(--stamp)}
+.steps h3{font:700 18px/1.25 var(--body); margin:0 0 6px}
+.steps p{margin:0; color:var(--ink-soft); font-size:15.5px}
+
+/* pool timeline */
+.timeline{position:relative; margin-top:10px}
+.tl-axis,.tl-row{display:grid; grid-template-columns:150px 1fr; gap:16px; align-items:center}
+.tl-row{height:52px}
+.tl-label{font-weight:600}
+.tl-track{position:relative; height:100%}
+.tl-bar{position:absolute; top:14px; bottom:14px; border-radius:3px; background:var(--ink); color:var(--paper); font-size:13px; font-weight:600; display:flex; align-items:center; padding:0 10px; white-space:nowrap; overflow:hidden}
+.tl-bar.upcoming{background:transparent; color:var(--ink); border:1.5px dashed var(--ink)}
+.tl-years{position:relative; height:24px; font-size:13px; color:var(--ink-faint)}
+.tl-years span{position:absolute; transform:translateX(-50%)}
+.tl-now{position:absolute; top:0; bottom:24px; width:2px; background:var(--stamp)}
+.tl-now span{position:absolute; top:-22px; left:6px; font-size:13px; font-weight:700; color:var(--stamp); white-space:nowrap}
+.how{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(18px,3vw,36px); margin-top:44px}
+.how h3{font:700 18px/1.25 var(--body); margin:0 0 6px}
+.how p{margin:0; color:var(--ink-soft); font-size:15.5px}
+
+footer{padding:40px 0 56px; border-top:2px solid var(--ink); margin-top:40px; color:var(--ink-soft); font-size:14.5px; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap}
+footer p{margin:0; max-width:46em}
+
+@media (max-width: 900px){
+  .hero{grid-template-columns:1fr}
+  .entry{grid-template-columns:1fr auto; gap:14px 18px}
+  .entry .facts{grid-column:1/-1; grid-row:2}
+  .entry .stamp{grid-column:2; grid-row:1}
+  .entry .btn{grid-column:1/-1; justify-self:start}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .how{grid-template-columns:1fr}
+}
+@media (max-width: 560px){
+  .top nav{display:none}
+  .flip{aspect-ratio:auto; min-height:330px}
+  .steps{grid-template-columns:1fr}
+  .tl-axis,.tl-row{grid-template-columns:92px 1fr; gap:10px}
+  .tl-bar{font-size:0; padding:0}
+  .deck-foot .hint{display:none}
+}
+@media (prefers-reduced-motion: reduce){ .flip{transition:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="6" width="26" height="20" rx="2" fill="var(--card)" stroke="currentColor" stroke-width="2"/><path d="M8 12h16M8 17h10" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="20" r="3" fill="var(--stamp)"/></svg>
+      Ham Exam Flash Cards
+    </a>
+    <nav>
+      <a href="#download">Download</a>
+      <a href="#print">Printing</a>
+      <a href="#pools">Pools</a>
+      <a id="gh-nav" href="#">GitHub</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <h1>Every exam question, on a card you can hold.</h1>
+        <p class="lede">Printable flash cards for the current Technician, General and Amateur Extra question pools. Print them double-sided on letter paper, cut them apart, and study anywhere.</p>
+        <div class="actions">
+          <a class="btn" href="#download">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 20h16"/></svg>
+            Download the cards
+          </a>
+          <a class="btn ghost" id="gh-hero" href="#">View the source</a>
+        </div>
+      </div>
+
+      <div class="deck" aria-label="Practice card">
+        <div class="deck-head">
+          <div class="seg" role="group" aria-label="License class">
+            <button type="button" data-pool="technician" aria-pressed="true">Technician</button>
+            <button type="button" data-pool="general" aria-pressed="false">General</button>
+            <button type="button" data-pool="extra" aria-pressed="false">Extra</button>
+          </div>
+          <span class="count" id="count"></span>
+        </div>
+        <div class="stack">
+          <div class="flip" id="flip">
+            <div class="face front" id="front" aria-live="polite">
+              <div class="qid">Loading a question…</div>
+            </div>
+            <div class="face back" id="back" aria-hidden="true">
+              <div class="big" id="letter"></div>
+              <p class="verdict" id="verdict"></p>
+              <p class="answer" id="answer"></p>
+              <div class="qid" id="back-id"></div>
+            </div>
+          </div>
+        </div>
+        <div class="deck-foot">
+          <button type="button" class="btn ghost" id="flip-btn">Flip card</button>
+          <button type="button" class="btn" id="next-btn">Next card</button>
+          <span class="hint"><kbd>A</kbd>–<kbd>D</kbd> answer · <kbd>Space</kbd> flip · <kbd>N</kbd> next</span>
+        </div>
+      </div>
+    </div>
+
+    <section id="download">
+      <h2>Pick your license class</h2>
+      <p class="sub">Each set is one PDF with the whole pool, plus a card for every diagram the questions refer to. Withdrawn questions are left out.</p>
+      <div class="log" id="log"></div>
+    </section>
+
+    <section id="print">
+      <h2>Printing</h2>
+      <p class="sub">Eight 4 × 2½ inch cards per sheet. The back of each sheet is mirrored so it lines up when your printer flips the page.</p>
+      <ol class="steps">
+        <li><h3>Set up duplex</h3><p>Letter paper, double-sided, flip on long edge. Card stock works if your printer takes it.</p></li>
+        <li><h3>Print at actual size</h3><p>Turn off “fit to page” or “shrink to fit”. Scaling moves the backs out of line.</p></li>
+        <li><h3>Test one sheet</h3><p>Print pages 1–2 and hold the sheet up to a light. The dashed lines on both sides should overlap.</p></li>
+        <li><h3>Print and cut</h3><p>Print the rest, then cut along the dashed lines. The marks in the margins guide a paper cutter.</p></li>
+      </ol>
+    </section>
+
+    <section id="pools">
+      <h2>Which pool you’ll be tested on</h2>
+      <p class="sub" id="updated-line">Each pool is used for exams from July 1 of its first year through June 30 of its last.</p>
+      <div class="timeline" id="timeline"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Question pools are released into the public domain by the NCVEC Question Pool Committee. This project is not affiliated with NCVEC or ARRL. Check <a href="https://www.ncvec.org/">ncvec.org</a> for the official pools.</p>
+    <p id="built"></p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const fmt = iso => { const [y,m,d] = iso.slice(0,10).split("-").map(Number); return `${MONTHS[m-1]} ${d}, ${y}`; };
+  const monthYear = iso => { const [y,m] = iso.split("-").map(Number); return `${MONTHS[m-1]} ${y}`; };
+  const CLASS_ORDER = ["technician","general","extra"];
+  let meta, pools = {}, current = "technician", q = null, answered = null;
+
+  const repoUrl = () => meta.repo || (location.hostname.endsWith("github.io")
+      ? `https://github.com/${location.hostname.split(".")[0]}/${location.pathname.split("/")[1]}` : "#");
+
+  function poolFor(cls){
+    const list = meta.pools.filter(p => p.name.startsWith(cls));
+    return list.find(p => p.status === "current") || list[0];
+  }
+
+  async function load(cls){
+    const p = poolFor(cls);
+    if (!pools[p.name]) pools[p.name] = await (await fetch(`data/${p.name}.json`)).json();
+    return [p, pools[p.name]];
+  }
+
+  async function next(){
+    const [p, list] = await load(current);
+    let n; do { n = list[Math.floor(Math.random() * list.length)]; } while (list.length > 1 && q && n.id === q.id);
+    q = n; answered = null;
+    $("count").textContent = `${list.length} questions in the ${p.name.split("-").slice(1).join("–")} pool`;
+    $("flip").classList.remove("flipped");
+    $("back").setAttribute("aria-hidden","true");
+    const front = $("front");
+    front.innerHTML = "";
+    const id = document.createElement("div"); id.className = "qid"; id.textContent = q.id; front.append(id);
+    const t = document.createElement("p"); t.className = "qtext"; t.textContent = q.q; front.append(t);
+    if (q.f){ const img = new Image(); img.className = "qfig"; img.alt = `Figure ${q.f.replace(/\.png$/,"").toUpperCase()}`; img.src = `data/${p.name}/${q.f}`; front.append(img); }
+    const ul = document.createElement("ul"); ul.className = "choices";
+    q.a.forEach((a,i) => {
+      const L = "ABCD"[i], li = document.createElement("li"), b = document.createElement("button");
+      b.type = "button"; b.innerHTML = `<b>${L}.</b><span></span>`; b.lastChild.textContent = a;
+      b.setAttribute("aria-label", `Answer ${L}: ${a}`);
+      b.addEventListener("click", () => choose(L));
+      li.append(b); ul.append(li);
+    });
+    front.append(ul);
+  }
+
+  function choose(L){ answered = L; flip(true); }
+
+  function flip(force){
+    if (!q) return;
+    const on = force === undefined ? !$("flip").classList.contains("flipped") : force;
+    $("letter").textContent = q.c;
+    $("answer").textContent = q.a["ABCD".indexOf(q.c)];
+    $("back-id").textContent = q.id;
+    const v = $("verdict");
+    if (answered){ v.textContent = answered === q.c ? "Correct" : `You picked ${answered}`; v.className = "verdict " + (answered === q.c ? "ok" : "no"); }
+    else { v.textContent = ""; v.className = "verdict"; }
+    $("flip").classList.toggle("flipped", on);
+    $("back").setAttribute("aria-hidden", String(!on));
+    $("front").setAttribute("aria-hidden", String(on));
+  }
+
+  function renderDownloads(){
+    const log = $("log");
+    const sorted = [...meta.pools].sort((a,b) => CLASS_ORDER.indexOf(a.name.split("-")[0]) - CLASS_ORDER.indexOf(b.name.split("-")[0]) || a.start.localeCompare(b.start));
+    for (const p of sorted){
+      const e = document.createElement("article"); e.className = "entry";
+      const mb = (p.bytes / 1048576).toFixed(1);
+      const stamp = p.status === "upcoming" ? `<div class="stamp soon">Starts<br>${monthYear(p.start)}</div>` : `<div class="stamp">Valid through<br>${monthYear(p.end)}</div>`;
+      e.innerHTML = `
+        <div><h3></h3><div class="pool">${p.start.slice(0,4)}–${p.end.slice(0,4)} question pool</div></div>
+        <div class="facts"><div><strong>${p.questions}</strong>questions</div><div><strong>${p.sheets}</strong>sheets</div><div><strong>${p.figure_cards}</strong>diagram ${p.figure_cards === 1 ? "card" : "cards"}</div></div>
+        ${stamp}
+        <a class="btn" href="${repoUrl()}/raw/main/cards/${p.pdf}">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 20h16"/></svg>
+          Download PDF (${mb} MB)</a>
+        ${p.excluded.length ? `<p class="note">Left out because NCVEC withdrew them: ${p.excluded.join(", ")}</p>` : ""}`;
+      e.querySelector("h3").textContent = p.class;
+      log.append(e);
+    }
+  }
+
+  function renderTimeline(){
+    const tl = $("timeline");
+    const y0 = Math.min(...meta.pools.map(p => +p.start.slice(0,4)));
+    const y1 = Math.max(...meta.pools.map(p => +p.end.slice(0,4)));
+    const span = (Date.UTC(y1,6,1) - Date.UTC(y0,6,1));
+    const pos = d => ((d - Date.UTC(y0,6,1)) / span) * 100;
+    const rows = CLASS_ORDER.map(cls => meta.pools.filter(p => p.name.startsWith(cls)));
+    let html = "";
+    rows.forEach(list => {
+      if (!list.length) return;
+      html += `<div class="tl-row"><div class="tl-label">${list[0].class}</div><div class="tl-track">`;
+      for (const p of list){
+        const [sy] = p.start.split("-").map(Number), [ey] = p.end.split("-").map(Number);
+        const l = pos(Date.UTC(sy,6,1)), r = pos(Date.UTC(ey,6,1));
+        html += `<div class="tl-bar ${p.status}" style="left:${l}%;width:${r-l}%" title="${p.class} ${sy}–${ey}">${sy}–${ey}</div>`;
+      }
+      html += `</div></div>`;
+    });
+    let years = "";
+    for (let y = y0; y <= y1; y++) years += `<span style="left:${pos(Date.UTC(y,0,1))}%">${y}</span>`;
+    html += `<div class="tl-axis"><div></div><div class="tl-years">${years}</div></div>`;
+    tl.innerHTML = html;
+    const now = pos(Date.now());
+    if (now >= 0 && now <= 100){
+      const track = tl.querySelector(".tl-years").parentElement;
+      const m = document.createElement("div"); m.className = "tl-now";
+      m.innerHTML = "<span>Today</span>";
+      tl.append(m);
+      const place = () => {
+        const tr = track.querySelector(".tl-years").getBoundingClientRect(), box = tl.getBoundingClientRect();
+        m.style.left = `${tr.left - box.left + tr.width * now / 100}px`;
+      };
+      place(); addEventListener("resize", place);
+    }
+  }
+
+  document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => {
+    document.querySelectorAll(".seg button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    current = b.dataset.pool; q = null; next();
+  }));
+  $("flip-btn").addEventListener("click", () => flip());
+  $("next-btn").addEventListener("click", next);
+  $("flip").addEventListener("click", e => { if (!e.target.closest("button")) flip(); });
+  addEventListener("keydown", e => {
+    if (e.metaKey || e.ctrlKey || e.altKey || /input|textarea|select/i.test(e.target.tagName)) return;
+    const k = e.key.toUpperCase();
+    if ("ABCD".includes(k) && k.length === 1 && q && !$("flip").classList.contains("flipped")) choose(k);
+    else if (k === "N" || e.key === "ArrowRight") next();
+    else if (e.key === " " && !(e.target.closest && e.target.closest("button,a"))) { e.preventDefault(); flip(); }
+  });
+
+  fetch("data/meta.json").then(r => r.json()).then(m => {
+    meta = m;
+    const gh = repoUrl();
+    $("gh-nav").href = gh; $("gh-hero").href = gh;
+    $("updated-line").textContent = `Each pool is used for exams from July 1 of its first year through June 30 of its last. Your exam comes from the pool in effect on the day you test. These cards include all NCVEC errata issued through ${fmt(m.updated)}.`;
+    $("built").textContent = `Site built ${fmt(m.built)}`;
+    renderDownloads(); renderTimeline(); next();
+  }).catch(() => {
+    $("front").innerHTML = '<div class="qid">Couldn’t load the question pools. Reload the page to try again.</div>';
+  });
+})();
+</script>
+</body>
+</html>

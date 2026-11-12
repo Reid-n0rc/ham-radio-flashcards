@@ -1,0 +1,26 @@
+[
+ {
+  "name": "extra-2024-2028",
+  "class": "Amateur Extra",
+  "start": "2024-07-01",
+  "end": "2028-06-30",
+  "status": "current",
+  "questions": 599
+ },
+ {
+  "name": "general-2023-2027",
+  "class": "General",
+  "start": "2023-07-01",
+  "end": "2027-06-30",
+  "status": "current",
+  "questions": 423
+ },
+ {
+  "name": "technician-2026-2030",
+  "class": "Technician",
+  "start": "2026-07-01",
+  "end": "2030-06-30",
+  "status": "current",
+  "questions": 409
+ }
+]
