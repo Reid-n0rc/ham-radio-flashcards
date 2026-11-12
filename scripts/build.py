@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Build flash card PDFs for every pool in pools/index.json into cards/."""
+import hashlib
 import json
 import os
 import sys
@@ -11,23 +12,42 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POOLS, CARDS = os.path.join(ROOT, "pools"), os.path.join(ROOT, "cards")
 
 
+def fingerprint(pool_dir, excl):
+    h = hashlib.sha256()
+    h.update(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "make_cards.py"), "rb").read())
+    pool = [q for q in json.load(open(os.path.join(pool_dir, "pool.json"))) if q["id"] not in set(excl)]
+    h.update(json.dumps(pool, sort_keys=True).encode())
+    for fig in sorted({q["figure"] for q in pool if q.get("figure")}):
+        h.update(open(os.path.join(pool_dir, fig), "rb").read())
+    return h.hexdigest()
+
+
 def main():
     os.makedirs(CARDS, exist_ok=True)
     index = json.load(open(os.path.join(POOLS, "index.json")))
     wpath = os.path.join(ROOT, "ncvec", "withdrawn.json")
     withdrawn = json.load(open(wpath)) if os.path.exists(wpath) else {}
     rows, made, manifest = [], set(), []
+    mpath = os.path.join(CARDS, "manifest.json")
+    prev = {m["name"]: m for m in json.load(open(mpath))} if os.path.exists(mpath) else {}
     for p in index:
         name, cls = p["name"], p["class"]
         years = name.split("-", 1)[1]
         fn = f"{cls.replace(' ', '_')}_{years}_Flash_Cards.pdf"
         pool_ids = {q["id"] for q in json.load(open(os.path.join(POOLS, name, "pool.json")))}
         excl = sorted(set(withdrawn.get(name, [])) & pool_ids)
-        nq, nf, sheets = build(os.path.join(POOLS, name), os.path.join(CARDS, fn),
-                               f"{cls} {years} Question Pool Flash Cards", excl)
+        fp = fingerprint(os.path.join(POOLS, name), excl)
+        old = prev.get(name)
+        if old and old.get("fingerprint") == fp and old["pdf"] == fn and os.path.exists(os.path.join(CARDS, fn)):
+            nq, nf, sheets = old["questions"], old["figure_cards"], old["sheets"]
+            print(f"{fn}: unchanged")
+        else:
+            nq, nf, sheets = build(os.path.join(POOLS, name), os.path.join(CARDS, fn),
+                                   f"{cls} {years} Question Pool Flash Cards", excl)
         made.add(fn)
-        manifest.append(dict(p, pdf=fn, figure_cards=nf, sheets=sheets, cards=nq + nf,
-                             excluded=excl, bytes=os.path.getsize(os.path.join(CARDS, fn))))
+        manifest.append(dict(p, questions=nq, pdf=fn, figure_cards=nf, sheets=sheets, cards=nq + nf,
+                             excluded=excl, bytes=os.path.getsize(os.path.join(CARDS, fn)),
+                             fingerprint=fp))
         note = f"excluded per NCVEC: {', '.join(excl)}" if excl else ""
         rows.append(f"| [{fn}]({fn}) | {cls} | {p['start']} to {p['end']} | {p['status']} "
                     f"| {nq} | {nf} | {sheets} | {note} |")

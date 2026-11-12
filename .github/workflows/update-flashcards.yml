@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - "scripts/**"
+      - "site/**"
       - "requirements.txt"
       - ".github/workflows/update-flashcards.yml"
 
@@ -27,6 +28,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # tags, for release versioning
 
       - uses: actions/setup-python@v5
         with:
@@ -56,12 +59,15 @@ jobs:
       - name: Build flash cards
         run: python scripts/build.py
 
+      - name: Build website
+        run: python scripts/build_site.py
+
       - name: Commit changes
         id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A pools cards ncvec
+          git add -A pools cards ncvec docs
           if git diff --cached --quiet; then
             echo "No changes."
             echo "cards_changed=false" >> "$GITHUB_OUTPUT"
@@ -81,10 +87,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          tag="cards-$(date -u +%Y%m%d-%H%M)"
-          gh release create "$tag" cards/*.pdf \
-            --title "Flash cards $(date -u +%Y-%m-%d)" \
-            --notes-file cards/README.md
+          last=$(git tag -l 'v*' --sort=-v:refname | head -1)
+          IFS=. read -r major minor patch <<< "${last#v}"
+          tag="v${major:-0}.${minor:-1}.$(( ${patch:-0} + 1 ))"
+          gh release create "$tag" cards/*.pdf --target "$(git rev-parse HEAD)" \
+            --title "$tag" --notes-file cards/README.md
 
       - name: Open issue for NCVEC changes
         if: steps.ncvec.outputs.changed == 'true'

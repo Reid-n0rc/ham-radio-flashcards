@@ -124,6 +124,9 @@ def main(state_dir):
 
     json.dump(new, open(sp, "w"), indent=1); open(sp, "a").write("\n")
     wp = os.path.join(state_dir, "withdrawn.json")
+    prev = json.load(open(wp)) if os.path.exists(wp) else {}
+    for name, ids in prev.items():  # withdrawals are permanent; never drop one
+        withdrawn[name] = sorted(set(withdrawn.get(name, [])) | set(ids))
     json.dump(withdrawn, open(wp, "w"), indent=1); open(wp, "a").write("\n")
     for name, ids in withdrawn.items():
         print(f"{name}: {len(ids)} withdrawn per NCVEC: {' '.join(ids)}")

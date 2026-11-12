@@ -11,7 +11,8 @@
   "sheets": 77,
   "cards": 609,
   "excluded": [],
-  "bytes": 535123
+  "bytes": 535123,
+  "fingerprint": "693ba426d28b98ddc8cc601cce843e611716be71831b2e423fbb358ed84c9ae7"
  },
  {
   "name": "general-2023-2027",
@@ -25,7 +26,8 @@
   "sheets": 53,
   "cards": 424,
   "excluded": [],
-  "bytes": 293221
+  "bytes": 293221,
+  "fingerprint": "114a757e8488d8f0bb7995af59f1f8b2353bd31b0034371bdbd7570565353c38"
  },
  {
   "name": "technician-2026-2030",
@@ -39,6 +41,7 @@
   "sheets": 52,
   "cards": 412,
   "excluded": [],
-  "bytes": 306859
+  "bytes": 306859,
+  "fingerprint": "84416f15053ec994be51304abdb29aa00888c57554d5ac768dcf4acca1ce7a1b"
  }
 ]

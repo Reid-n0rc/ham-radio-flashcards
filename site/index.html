@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ham Exam Flash Cards</title>
-<meta name="description" content="Printable duplex flash cards for the current Technician, General and Amateur Extra question pools.">
+<meta name="description" content="Printable duplex flash cards for the current Technician, General and Amateur Extra question pools, rebuilt automatically when NCVEC changes a pool.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -208,7 +208,7 @@ footer p{margin:0; max-width:46em}
     <nav>
       <a href="#download">Download</a>
       <a href="#print">Printing</a>
-      <a href="#pools">Pools</a>
+      <a href="#pools">Updates</a>
       <a id="gh-nav" href="#">GitHub</a>
     </nav>
   </header>
@@ -217,7 +217,7 @@ footer p{margin:0; max-width:46em}
     <div class="hero">
       <div>
         <h1>Every exam question, on a card you can hold.</h1>
-        <p class="lede">Printable flash cards for the current Technician, General and Amateur Extra question pools. Print them double-sided on letter paper, cut them apart, and study anywhere.</p>
+        <p class="lede">Printable flash cards for the current Technician, General and Amateur Extra question pools. Print them double-sided on letter paper, cut them apart, and study anywhere. When NCVEC changes a pool, the cards are rebuilt automatically.</p>
         <div class="actions">
           <a class="btn" href="#download">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 20h16"/></svg>
@@ -278,12 +278,16 @@ footer p{margin:0; max-width:46em}
       <h2>Which pool you’ll be tested on</h2>
       <p class="sub" id="updated-line">Each pool is used for exams from July 1 of its first year through June 30 of its last.</p>
       <div class="timeline" id="timeline"></div>
+      <div class="how">
+        <div><h3>Checked every day</h3><p>An automated job compares these cards against the NCVEC Question Pool Committee’s release pages, including errata.</p></div>
+        <div><h3>Withdrawn questions come off</h3><p>When NCVEC withdraws a question, it is removed from the cards on the next run and new PDFs are published.</p></div>
+        <div><h3>Every change is recorded</h3><p>Each rebuild becomes a <a id="gh-releases" href="#">release</a> with the PDFs attached. Changes to NCVEC’s pool pages open an <a id="gh-issues" href="#">issue</a> for review.</p></div>
+      </div>
     </section>
   </main>
 
   <footer>
     <p>Question pools are released into the public domain by the NCVEC Question Pool Committee. This project is not affiliated with NCVEC or ARRL. Check <a href="https://www.ncvec.org/">ncvec.org</a> for the official pools.</p>
-    <p id="built"></p>
   </footer>
 </div>
 
@@ -424,8 +428,8 @@ footer p{margin:0; max-width:46em}
     meta = m;
     const gh = repoUrl();
     $("gh-nav").href = gh; $("gh-hero").href = gh;
-    $("updated-line").textContent = `Each pool is used for exams from July 1 of its first year through June 30 of its last. Your exam comes from the pool in effect on the day you test. These cards include all NCVEC errata issued through ${fmt(m.updated)}.`;
-    $("built").textContent = `Site built ${fmt(m.built)}`;
+    $("gh-releases").href = gh + "/releases"; $("gh-issues").href = gh + "/issues";
+    $("updated-line").textContent = `Each pool is used for exams from July 1 of its first year through June 30 of its last. Your exam comes from the pool in effect on the day you test. New pools appear here as soon as NCVEC releases them. Cards last changed ${fmt(m.updated)}.`;
     renderDownloads(); renderTimeline(); next();
   }).catch(() => {
     $("front").innerHTML = '<div class="qid">Couldn’t load the question pools. Reload the page to try again.</div>';

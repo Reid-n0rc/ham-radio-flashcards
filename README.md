@@ -8,7 +8,7 @@ Printable flash cards for the current US amateur radio license question pools.
 | General | 2023–2027 | 423 | 53 | [General_2023-2027_Flash_Cards.pdf](cards/General_2023-2027_Flash_Cards.pdf) |
 | Amateur Extra | 2024–2028 | 599 | 77 | [Amateur_Extra_2024-2028_Flash_Cards.pdf](cards/Amateur_Extra_2024-2028_Flash_Cards.pdf) |
 
-Each pool is used for exams from July 1 of its first year through June 30 of its last. All NCVEC errata issued through November 12, 2026 are included; withdrawn questions are left out.
+Each pool is used for exams from July 1 of its first year through June 30 of its last. Withdrawn questions are left out. The cards are kept current automatically (see below).
 
 Website with a practice card: https://reid-n0rc.github.io/ham-radio-flashcards/
 
@@ -19,5 +19,26 @@ Website with a practice card: https://reid-n0rc.github.io/ham-radio-flashcards/
 - Front: question and choices. Back: answer letter and question ID.
 - Print pages 1–2 first and check front/back alignment against a light.
 - Diagram cards are at the end of each set.
+
+## Updates
+
+A GitHub Actions workflow runs daily, and can be run by hand from **Actions → Update flash cards → Run workflow**:
+
+1. Pulls the machine-readable pools from [russolsen/ham_radio_question_pool](https://github.com/russolsen/ham_radio_question_pool).
+2. Keeps pools that are in effect or already released for the next cycle; drops expired ones.
+3. Checks the [NCVEC](https://ncvec.org) pool pages for new releases and errata. Questions NCVEC lists as withdrawn are left off the cards even before the upstream data catches up.
+4. Rebuilds a PDF only when the questions it prints have changed, then updates the website and publishes a new patch release.
+5. Opens an issue when an NCVEC pool page changes, so wording or answer changes can be reviewed.
+
+To build locally:
+
+```sh
+pip install -r requirements.txt     # also needs fonts-liberation
+git clone --depth 1 https://github.com/russolsen/ham_radio_question_pool /tmp/upstream
+python scripts/sync_pools.py /tmp/upstream pools
+python scripts/check_ncvec.py ncvec
+python scripts/build.py
+python scripts/build_site.py
+```
 
 Question pools are released into the public domain by the NCVEC Question Pool Committee. Not affiliated with NCVEC or ARRL.
